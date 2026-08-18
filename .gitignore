@@ -1,0 +1,23 @@
+# PlatformIO derleme ciktilari
+.pio/
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Toplanan CSI verisi ve egitilmis model: git ile tasinmaz.
+# Veri hangi bilgisayarda toplanirsa egitim de orada yapilir.
+training/data/
+training/artifacts/
+
+# Derleme artiklari
+*.tsbuildinfo
+node_modules/
+
+# IDE / isletim sistemi
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+

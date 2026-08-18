@@ -1,0 +1,8 @@
+huggingface-hub>=0.30
+numpy>=1.26
+pyserial>=3.5
+pytest>=8.0
+scikit-learn>=1.4
+safetensors>=0.4
+torch>=2.2
+
