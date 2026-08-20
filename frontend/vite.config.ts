@@ -44,9 +44,19 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
+    server: {
+      watch: {
+        // Miniflare rewrites its registry heartbeat files inside `.wrangler` on
+        // a timer (see MINIFLARE_REGISTRY_PATH above). Vite's watcher races
+        // with those rewrites and dies with an uncaught `lstat UNKNOWN` error
+        // on Windows, taking the whole dev server down. Generated output is
+        // never worth watching anyway.
+        ignored: ["**/.wrangler/**", "**/dist/**", "**/.vinext/**"],
+        ...(isCodexSeatbeltSandbox
+          ? { useFsEvents: false, usePolling: true }
+          : {}),
+      },
+    },
     plugins: [
       vinext(),
       sites(),
